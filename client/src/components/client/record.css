@@ -1,0 +1,188 @@
+
+        body {
+          /* text-align: center; */
+          margin-left: 50px;
+          margin-right: 50px;
+      
+        }
+        table {
+          border-collapse: collapse;
+          width: 50%;
+          margin: 0 auto;
+          border: '2px solid black' ;
+        }
+        th, td {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 8px;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+
+        /* record.css */
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Add this class to hide elements */
+  .hidden {
+    display: none;
+  }
+  .loading-central-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  .loading-central-circle::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    border-top-color: #FF0000; /* Red */
+    border-bottom-color: #2eccd1; /* Gold */
+    animation: spin 2s linear infinite reverse;
+  }
+  
+  .loading-central-circle::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    border-top-color: #FFD700; /* Gold */
+    border-bottom-color: #008000; /* Green */
+    animation: spin 3s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .hidden {
+    display: none;
+  }
+
+
+
+
+
+  @media print {
+    button {
+    display: none;
+    }
+    h4{
+    text-align: center;
+    }
+    *{
+      margin: 0px;
+      font-size: 12px;
+    }
+    
+    }
+
+  
+
+
+
+
+
+
+
+
+    
+
+
+    .hover-table {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-38%, -50%);
+      background-color: white;
+      border: 1px solid #ccc;
+      width: 1000px;/* Set the desired width */
+      max-height: 500px; /* Set the desired height */
+      overflow: auto;
+    }
+    
+    .hover-table table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+    }
+    
+    .hover-table th,
+    .hover-table td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    
+    .hover-table th {
+      background-color: #f2f2f2;
+      position: sticky;
+      top: 0%;
+    }
+    
+    .hover-table tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .hover-table tbody tr:hover {
+      background-color: #ddd;
+    }
+    
+    
+
+
+
+    @keyframes textColorCycle {
+      0% { color: #d62929; }
+      25% { color: #27d627; }
+      50% { color: #6666f5; }
+      75% { color: #dfdf41; }
+      100% { color: #641818; }
+    }
+    
+    .animated-th {
+      animation: textColorCycle 3s infinite;
+      cursor: pointer;
+    }
+ 
+
+
+    @keyframes textColorCycle1 {
+      100% { color: #641818; }
+      75% { color: #dfdf41; }
+      50% { color: #6666f5; }
+      25% { color: #27d627; }
+      0% { color: #d62929; }
+    }
+    
+    .animated-th1 {
+      animation: textColorCycle1 3s infinite;
+      cursor: pointer;
+    }
+
+    

@@ -1,0 +1,96 @@
+
+
+
+
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: #ffc107;
+    color: #5d1b8d;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    margin-right: 10px;
+  }
+  .dropbtn:hover {
+    background-color: #ffc107;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  /* .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+   */
+  /* Show the dropdown menu on hover */
+  /* .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content.show {
+    display: block;
+  }
+   */
+
+
+/* 
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  
+  .dropdown-content {
+    display: none;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+   */
+
+   .dropdown-content {
+    display: block;
+  }
+  
+  /* Optional: Adjust the positioning if needed */
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  .table-scroll {
+    max-height: 600px; /* Adjust this height based on your requirement */
+    overflow-y: auto;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Add a background color to the header */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Optional: Add a shadow effect */
+  }
+  
+
+  .table {
+    table-layout: auto; /* This allows the table to be flexible */
+    width: 100%; /* This makes the table take up the full width of its container */
+}
+
+.table th, .table td {
+    width: auto; /* This allows the table cells to be flexible */
+    overflow: auto; /* This allows the content to be scrollable if it overflows */
+}

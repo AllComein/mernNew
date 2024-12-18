@@ -1,0 +1,141 @@
+@media print {
+    .print-button {
+      display: none;
+    }
+  }
+  @media print {
+    .back-button {
+      display: none;
+    }
+    .mail-preview{
+      display: none;
+    }
+    input{
+        border:2px solid black !important;
+    }
+    .textarea{
+        border:2px solid black !important;
+    }
+  h5{
+      display: none;
+    }
+    .btn{
+      display: none;
+    }
+  }
+
+  @media print {
+    .record {
+      page-break-before: always;
+    }
+  }
+  
+
+  @media print {
+    .sidebar {
+      display: none; /* Hide the sidebar */
+    }
+  
+    .content {
+      margin-left: 0; /* Remove any left margin that was applied to account for the sidebar */
+      padding: 20px; /* Add some padding for better readability */
+    }
+  
+    /* Adjust other styles as needed for print */
+  }
+  
+
+p{
+    line-height: 1.5;
+}
+
+li{
+    line-height: 1.5;
+}
+
+.p2{
+    line-height: 1.2;
+}
+ul{
+    line-height: 1.5;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  input, button {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .back-button {
+    background-color: #dc3545;
+  }
+  
+  .back-button:hover {
+    background-color: #c82333;
+  }
+  
+  .print-button {
+    background-color: #28a745;
+  }
+  
+  .print-button:hover {
+    background-color: #218838;
+  }
+  
+  .record {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .record:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Add this to your existing CSS file or create a new one */
+.print-styles {
+    @media print {
+      input[type="text"] {
+        border-style: double;
+      }
+  
+      textarea {
+        border-style: double;
+      }
+    }
+  }
+  
+  body {
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  /* You can use media queries to adjust styles based on the screen size */
+  @media screen and (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    body {
+      font-size: 14px;
+    }
+  
+    /* Add more responsive styles as needed */
+  }
