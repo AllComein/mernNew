@@ -134,6 +134,7 @@ date :{type: DataTypes.STRING(225) , allowNull: true},
 describe :{type: DataTypes.STRING(225) , allowNull: true},
 result :{type: DataTypes.STRING(225) , allowNull: true},
 
+es_dpboids :{type: DataTypes.STRING(225) , allowNull: true},
 
 
 

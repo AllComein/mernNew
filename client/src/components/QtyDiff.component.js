@@ -577,9 +577,9 @@ const filteredData = records.filter(record =>
                 {isButtonDisabled ? 'Please wait...' : 'Update KOTAK_PF.csv Data'}
             </button>
 
-            {/* <button ref={buttonRef} onClick={openBatchFile1} disabled={isButtonDisabled}>
-                {isButtonDisabled ? 'Please wait...' : 'Update KSLPF Data'}
-            </button> */}
+            <button ref={buttonRef} onClick={openBatchFile1} disabled={isButtonDisabled}>
+                {isButtonDisabled ? 'Please wait...' : 'Update Remove Data'}
+            </button>
 
             <button onClick={downloadadddata}>
                 Download ADD Data

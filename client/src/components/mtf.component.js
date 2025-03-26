@@ -45,10 +45,11 @@ export default class BoardMtf extends Component {
       const currentUser = AuthService.getCurrentUser();
       const response = await fetch("http://183.182.84.228:4005/mtf/");
       const letterData = await response.json();
-      const filteredLetterData = letterData.filter(
-        (record) =>
-          currentUser.username === record.locnid
-      );
+      const filteredLetterData = letterData;
+      // .filter(
+      //   (record) =>
+      //     currentUser.username === record.locnid
+      // );
       if (filteredLetterData.length > 0) {
         this.setState({ letterData: filteredLetterData, dataFound: true });
       } else {

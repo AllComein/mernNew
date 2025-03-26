@@ -893,6 +893,10 @@ import TradesSub from "./components/trades/trades.component";
 import AskClient from "./components/askclient/ask-client";
 import AskClients from "./components/askclient/ask-clients";
 import Turnover from "./components/turnover";
+import LedgerDetailUser from "./components/ledgerdetail/ledgerdetailuser.component";
+import Brokrage from "./components/brokrage/brokrage.component";
+import Brokrages from "./components/brokrage/brokrages.component";
+import Dealslips from "./components/letter/dealslips.component";
 
 
 
@@ -1046,15 +1050,18 @@ class App extends Component {
     return (
       <div className="app-container">
 
-<div className="news-ticker" style={{height : '30px'}} >
+{/* <div className="news-ticker" style={{height : '30px'}} >
         <p className="news-text">
         {tabledata.map((record) => record.source_table)} is update as 
           Latest Update: New features added to the application! Check out the Trades&nbsp;&nbsp;&nbsp;&nbsp;
-          {/* |
+          
+        </p>
+      </div> */}
+
+
+      {/* |
           &nbsp;&nbsp;&nbsp;&nbsp;System maintenance scheduled for this weekend&nbsp;&nbsp;&nbsp;&nbsp;|
           &nbsp;&nbsp;&nbsp;&nbsp;Don't forget to update your profile settings. */}
-        </p>
-      </div>
 
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <div className="container">
@@ -1190,6 +1197,13 @@ class App extends Component {
                 <FaRegFolderClosed/> Dpsoh Script Wise
                 </Link>
               </li>
+              
+              {/* <li className={`sidebar-item ${activeItem === 'item408' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item408')}>
+                <Link to={"/newbrok"} className="nav-link">
+                <FaRegFolderClosed/> Brokrage Client Wise
+                </Link>
+              </li> */}
               {/* <li className={`sidebar-item ${activeItem === 'item3' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item3')}>
                 <Link to={"/letter"} className="nav-link">
@@ -1287,7 +1301,7 @@ class App extends Component {
               </li>
               <li className={`sidebar-item ${activeItem === 'item7' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item7')}>
-              <Link to={"/mtfs"} className="nav-link">
+              <Link to={"/mtf"} className="nav-link">
              <MdOutlinePendingActions/> Pending Pledgor
               </Link>
             </li>
@@ -1379,6 +1393,12 @@ class App extends Component {
             onClick={() => this.handleItemClick('item401')}>
                 <Link to={"/dpsoh2"} className="nav-link">
                 <FaRegFolderClosed/> Dpsoh Script Wise
+                </Link>
+              </li>
+              <li className={`sidebar-item ${activeItem === 'item408' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item408')}>
+                <Link to={"/newbroks"} className="nav-link">
+                <FaRegFolderClosed/> Brokrage Client Wise
                 </Link>
               </li>
             {/* <li className={`sidebar-item ${activeItem === 'item1' ? 'active' : ''}`}
@@ -1476,10 +1496,24 @@ class App extends Component {
                 </Link>
               </li>
 
+
+              <li className={`sidebar-item ${activeItem === 'item2570' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item2570')}>
+                <Link to={"/dealslips"} className="nav-link">
+                <SlEnvolopeLetter/> Dealslip
+                </Link>
+              </li>
+
               <li className={`sidebar-item ${activeItem === 'item2578' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item2578')}>
                 <Link to={"/trialbals"} className="nav-link">
                 <SlEnvolopeLetter/> Trial Balance
+                </Link>
+              </li>
+              <li className={`sidebar-item ${activeItem === 'item12345' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item12345')}>
+                <Link to={"/ledgerdetails"} className="nav-link">
+                <SlEnvolopeLetter/> Ledger Details
                 </Link>
               </li>
               <li className={`sidebar-item ${activeItem === 'item2579' ? 'active' : ''}`}
@@ -1491,7 +1525,7 @@ class App extends Component {
               
             <li className={`sidebar-item ${activeItem === 'item7' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item7')}>
-              <Link to={"/mtf"} className="nav-link">
+              <Link to={"/mtfs"} className="nav-link">
               <MdOutlinePendingActions/>  Pending Pledgor
               </Link>
             </li>
@@ -1664,6 +1698,12 @@ class App extends Component {
                 <FaRegFolderClosed/> Dpsoh Script Wise
                 </Link>
               </li>
+              <li className={`sidebar-item ${activeItem === 'item408' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item408')}>
+                <Link to={"/newbrok"} className="nav-link">
+                <FaRegFolderClosed/> Brokrage Client Wise
+                </Link>
+              </li>
               {/* <li className={`sidebar-item ${activeItem === 'item5' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item5')}>
                 <Link to={"/letter"} className="nav-link">
@@ -1824,7 +1864,7 @@ class App extends Component {
             </li>
               <li className={`sidebar-item ${activeItem === 'item10' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item10')}>
-              <Link to={"/mtfs"} className="nav-link">
+              <Link to={"/mtf"} className="nav-link">
               <MdOutlinePendingActions/> Pending Pledgor
               </Link>
             </li>
@@ -1978,6 +2018,7 @@ class App extends Component {
 
 
             {currentUser && !showSubModeratorBoard && !showAdminBoard && !showModeratorBoard && (
+              <>
               <li className={`sidebar-item ${activeItem === 'item1' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item1')}>
                 <Link to={"/user"} className="nav-link">
@@ -1985,6 +2026,13 @@ class App extends Component {
                 </Link>
               </li>
               
+              <li className={`sidebar-item ${activeItem === 'item2' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item2')}>
+                <Link to={"/ledgeruser"} className="nav-link">
+                 Ledger Details
+                </Link>
+              </li>
+              </>
             )}
           </div>
 
@@ -2412,6 +2460,26 @@ AuthService.getCurrentUser() ? (
             <Route path="/turnoversum" element={
 AuthService.getCurrentUser() ? (
   <Turnover/>      ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/ledgeruser" element={
+AuthService.getCurrentUser() ? (
+  <LedgerDetailUser/>      ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/newbrok" element={
+AuthService.getCurrentUser() ? (
+  <Brokrage/>      ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/newbroks" element={
+AuthService.getCurrentUser() ? (
+  <Brokrages/>      ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/dealslips" element={
+AuthService.getCurrentUser() ? (
+  <Dealslips/>      ) : (
               <Navigate to="/login" />
             )}/>
             </Routes>

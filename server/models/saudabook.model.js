@@ -1,0 +1,88 @@
+const { DataTypes } = require("sequelize");
+
+module.exports = model;
+
+function model(sequelize) {
+  const attributes = {
+    trade_segment_id :{type: DataTypes.FLOAT , allowNull: true},
+    exchange_code :{type: DataTypes.STRING(225) , allowNull: true},
+    client_code :{type: DataTypes.STRING(225) , allowNull: true},
+    cl_name :{type: DataTypes.STRING(225) , allowNull: true},
+    Clientlocation :{type: DataTypes.STRING(225) , allowNull: true},
+    Client_vertical :{type: DataTypes.STRING(225) , allowNull: true},
+    trade_no :{type: DataTypes.STRING(225) , allowNull: true},
+    trade_date :{type: DataTypes.STRING(225) , allowNull: true},
+    trade_time :{type: DataTypes.STRING(225) , allowNull: true},
+    order_no :{type: DataTypes.STRING(225) , allowNull: true},
+    order_time :{type: DataTypes.STRING(225) , allowNull: true},
+    scrip_code :{type: DataTypes.STRING(225) , allowNull: true},
+    scrip_symbol :{type: DataTypes.STRING(225) , allowNull: true},
+    scrip_series :{type: DataTypes.STRING(225) , allowNull: true},
+    scrip_name :{type: DataTypes.STRING(225) , allowNull: true},
+    trade_type :{type: DataTypes.FLOAT , allowNull: true},
+    trade_quantity :{type: DataTypes.FLOAT , allowNull: true},
+    market_rate :{type: DataTypes.FLOAT , allowNull: true},
+    market_type :{type: DataTypes.FLOAT , allowNull: true},
+    settlement_no :{type: DataTypes.FLOAT , allowNull: true},
+    settlement_year :{type: DataTypes.FLOAT , allowNull: true},
+    settlement_type :{type: DataTypes.STRING(225) , allowNull: true},
+    trade_flag :{type: DataTypes.STRING(225) , allowNull: true},
+    ccf_flag :{type: DataTypes.FLOAT , allowNull: true},
+    participant_code :{type: DataTypes.STRING(225) , allowNull: true},
+    backoffice_code :{type: DataTypes.STRING(225) , allowNull: true},
+    alias_code :{type: DataTypes.STRING(225) , allowNull: true},
+    net_rate :{type: DataTypes.FLOAT , allowNull: true},
+    brokerage_per_unit :{type: DataTypes.FLOAT , allowNull: true},
+    squp_delv_flag :{type: DataTypes.STRING(225) , allowNull: true},
+    stt :{type: DataTypes.FLOAT , allowNull: true},
+    parent_record_id :{type: DataTypes.FLOAT , allowNull: true},
+    original_trade :{type: DataTypes.FLOAT , allowNull: true},
+    contract_no :{type: DataTypes.FLOAT , allowNull: true},
+    subcontract_no :{type: DataTypes.STRING(225) , allowNull: true},
+    bill_no :{type: DataTypes.FLOAT , allowNull: true},
+    sub_bill_no :{type: DataTypes.STRING(225) , allowNull: true},
+    upload_user_id :{type: DataTypes.STRING(225) , allowNull: true},
+    accumulation_ref_no :{type: DataTypes.FLOAT , allowNull: true},
+    process_status :{type: DataTypes.FLOAT , allowNull: true},
+    session_id :{type: DataTypes.FLOAT , allowNull: true},
+    trade_turnover :{type: DataTypes.FLOAT , allowNull: true},
+    clientwise_turnover :{type: DataTypes.FLOAT , allowNull: true},
+    scripwise_turnover :{type: DataTypes.FLOAT , allowNull: true},
+    orderwise_turnover :{type: DataTypes.FLOAT , allowNull: true},
+    contractwise_turnover :{type: DataTypes.FLOAT , allowNull: true},
+    original_trade_date :{type: DataTypes.FLOAT , allowNull: true},
+    scrip_weighted_rate :{type: DataTypes.FLOAT , allowNull: true},
+    trade_nature :{type: DataTypes.FLOAT , allowNull: true},
+    contract_type :{type: DataTypes.STRING(225) , allowNull: true},
+    confirmed_market_rate :{type: DataTypes.FLOAT , allowNull: true},
+    profit_loss_amount :{type: DataTypes.FLOAT , allowNull: true},
+    contract_market_rate_digits :{type: DataTypes.FLOAT , allowNull: true},
+    contract_brokerage_digits :{type: DataTypes.FLOAT , allowNull: true},
+    market_rate_round_truncate :{type: DataTypes.STRING(225) , allowNull: true},
+    brokerage_round_truncate :{type: DataTypes.STRING(225) , allowNull: true},
+    contract_market_value :{type: DataTypes.FLOAT , allowNull: true},
+    contract_net_value :{type: DataTypes.FLOAT , allowNull: true},
+    trade_source :{type: DataTypes.FLOAT , allowNull: true},
+    uploaded_net_rate :{type: DataTypes.FLOAT , allowNull: true},
+    upla_original_market_rate :{type: DataTypes.FLOAT , allowNull: true},
+    oms_id :{type: DataTypes.STRING(225) , allowNull: true},
+    oms_user_id :{type: DataTypes.STRING(225) , allowNull: true},
+    amd_user_id :{type: DataTypes.FLOAT , allowNull: true},
+    amd_date :{type: DataTypes.STRING(225) , allowNull: true},
+    transaction_record_id :{type: DataTypes.FLOAT , allowNull: true},
+    brokerage_per_unit_original :{type: DataTypes.FLOAT , allowNull: true},
+    original_participant_code :{type: DataTypes.STRING(225) , allowNull: true},
+    original_exchange_code :{type: DataTypes.STRING(225) , allowNull: true},
+    locnid :{type: DataTypes.STRING(225) , allowNull: true},
+
+  };
+  /* by default it pluralize the model, so it will tread it as 'People' and query will be like
+     select * from People  (if you have pre existing table Person, then it won't get records)
+  */
+  const options = {
+    freezeTableName: true,
+    // don't add the timestamp attributes (updatedAt, createdAt)
+    timestamps: false,
+  };
+  return sequelize.define("saudabook", attributes, options);
+}

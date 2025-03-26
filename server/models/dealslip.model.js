@@ -27,7 +27,9 @@ function model(sequelize) {
     locnid : { type: DataTypes.STRING(255), allowNull: true },
     updatetime : { type: DataTypes.STRING(255), allowNull: true } ,
     entrytime : { type: DataTypes.STRING(255), allowNull: true },
-    
+    mtf : { type: DataTypes.FLOAT, allowNull: true },
+    mtm : { type: DataTypes.FLOAT, allowNull: true },
+    city :{type: DataTypes.STRING(225) , allowNull: true},
 
   };
   /* by default it pluralize the model, so it will tread it as 'People' and query will be like

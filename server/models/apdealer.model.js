@@ -8,6 +8,7 @@ function model(sequelize) {
     nismname :{type: DataTypes.STRING(225) , allowNull: true},
     address :{type: DataTypes.STRING(225) , allowNull: true},
     SUBBROKERNAME :{type: DataTypes.STRING(225) , allowNull: true},
+    city :{type: DataTypes.STRING(225) , allowNull: true},
   };
   /* by default it pluralize the model, so it will tread it as 'People' and query will be like
      select * from People  (if you have pre existing table Person, then it won't get records)

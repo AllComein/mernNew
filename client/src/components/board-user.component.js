@@ -199,6 +199,7 @@ export default class BoardUser extends Component {
       portfoData: [],
       nomineeData: [],
       trialbal: [],
+      trade: [],
       isViewingRecord: false,
       hoveredDptype: "",
       mousePosition: { x: 0, y: 0 },
@@ -255,7 +256,8 @@ export default class BoardUser extends Component {
       netpoData: [],
       portfoData: [],
       nomineeData: [],
-      trialbal: []
+      trialbal: [],
+      trade: []
     });
   };
 
@@ -500,6 +502,54 @@ export default class BoardUser extends Component {
   };
 
 
+
+  handleTrades = async () => {
+    try {
+      const currentUser = AuthService.getCurrentUser();
+      const response = await fetch("http://183.182.84.228:4005/tradeslip/");
+      const trade = await response.json();
+      const selectedTradeData = trade.filter(
+        (item) => item.code === currentUser.username
+      );
+      if (selectedTradeData.length > 0) {
+        this.setState({ trialbal: selectedTradeData });
+        this.setState({ activeButton: 'trade' });
+      } else {
+        window.alert('Data not found for selected record.');
+      }
+    } catch (error) {
+      window.alert(`An error occurred: ${error}`);
+    }
+    finally {
+      this.setState({ loading: false }); // Set loading to false when data fetching completes
+    }
+  };
+
+
+
+  // handleLedgerDetails = async () => {
+  //   try {
+  //     const currentUser = AuthService.getCurrentUser();
+  //     const response = await fetch("http://183.182.84.228:4005/ledgertrn/");
+  //     const LedgerDetails = await response.json();
+  //     const selectedLedgerDetailsData = LedgerDetails.filter(
+  //       (item) => item.cli_cod === currentUser.username
+  //     );
+  //     if (selectedLedgerDetailsData.length > 0) {
+  //       this.setState({ trialbal: selectedLedgerDetailsData });
+  //       this.setState({ activeButton: 'ledgerdetails' });
+  //     } else {
+  //       window.alert('Data not found for selected record.');
+  //     }
+  //   } catch (error) {
+  //     window.alert(`An error occurred: ${error}`);
+  //   }
+  //   finally {
+  //     this.setState({ loading: false }); // Set loading to false when data fetching completes
+  //   }
+  // };
+
+
   handleExitView = () => {
     this.setState({ isViewingRecord: false });
   };
@@ -530,7 +580,8 @@ export default class BoardUser extends Component {
       closerTransferFilter,
       priorityFilter,
       searchQuery,  
-      filteredData
+      filteredData,
+      trade
     } = this.state;
 
     return (
@@ -550,6 +601,13 @@ export default class BoardUser extends Component {
 
 {letterData &&  letterData.length > 0 &&(
           <div>
+            {loading && (
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        )}
                      <table class="6">
   <thead>
     <tr>
@@ -618,6 +676,8 @@ export default class BoardUser extends Component {
             <button onClick={this.handleViewPortcom}>Portfolio Comodity</button>
 
             <button onClick={this.handleTrialBal}>Trial Balance</button>
+
+            <button onClick={this.handleTrades}>Trades</button>
          
         
             {activeButton === 'letter' && letterData !== null &&  (
@@ -768,6 +828,7 @@ export default class BoardUser extends Component {
     </tr>
     <tr>
 <th>Virtual_Bank A/c No.</th>
+{/* <td></td> */}
  <td>{letterData[0].vir_bkacno}</td>
 </tr><tr>
 <th>Virtual Bank Name</th>
@@ -1796,7 +1857,7 @@ export default class BoardUser extends Component {
             </Spinner>
           </div>
         )}
-            <h3>Nominee Data</h3>
+            <h3>Trial Balance Data</h3>
 
             <table class="6" className="table table-striped table-scroll">
     <thead>
@@ -1867,6 +1928,77 @@ export default class BoardUser extends Component {
   
           </div>
           )}
+
+
+
+{activeButton === 'trade' && trade !== null && (
+          <div>
+            {!dataFound && (
+                <div className="alert alert-warning" role="alert">
+                  Data not found!
+                </div>
+              )}
+
+{loading && (
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        )}
+            <h3>Trade Data</h3>
+
+            <table class="6" className="table table-striped table-scroll">
+    <thead>
+      <tr> 
+      <th>name</th>
+                  <th>code</th>
+                  <th>scripname</th>
+                  <th>exchange</th>
+                  <th>segment</th>
+                  <th>buy_sell</th>
+                  <th>rate</th>
+                  <th>tradedqty</th>
+                  <th>stk</th>
+                  <th>pre</th>
+                  <th>amount</th>
+                  <th>tradedate</th>
+                  <th>orderno</th>
+                  <th>tradeno</th>
+                  <th>tradetime</th>
+                  <th>locnid</th>
+      </tr>
+    </thead>
+    <tbody>
+            {trade.map((record) => (
+            
+           
+      <tr >
+    <td>{record.name}</td>
+    <td>{record.code}</td>
+    <td>{record.scripname}</td>
+    <td>{record.exchange}</td>
+    <td>{record.segment}</td>
+    <td>{record.buy_sell}</td>
+    <td>{record.rate}</td>
+    <td>{record.tradedqty}</td>
+    <td>{record.stk}</td>
+    <td>{record.pre}</td>
+    <td>{record.amount}</td>
+    <td>{record.tradedate}</td>
+    <td>{record.orderno}</td>
+    <td>{record.tradeno}</td>
+    <td>{record.tradetime}</td>
+    <td>{record.locnid}</td>
+      </tr>
+      ))}
+    </tbody>
+  </table>
+  
+          </div>
+          )}
+
+
           </div>
         
       </div>

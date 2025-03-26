@@ -1270,7 +1270,7 @@ export default class AskClient extends Component {
         return; // Exit early if there's no valid username to process
       }
 
-      console.log(brcds);
+      // console.log(brcds);
   
       const filteredData = letterData.filter(
         (record) => record.priority === "DPH" && record.brcd === brcds

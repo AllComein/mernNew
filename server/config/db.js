@@ -50,6 +50,10 @@ const tabledateModel = require("../models/tabledate.model");
 const ucccountsModel = require("../models/ucccounts.model");
 const esldumpModel = require("../models/esldump.model");
 // const bhavModel = require("../models/bhav.model");
+const saudabookModel = require("../models/saudabook.model");
+const saudabookcomModel = require("../models/saudabookcom.model");
+const saudabookdevModel = require("../models/saudabookdev.model");
+const apsubbrokermainModel = require("../models/apsubbrokermain.model");
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -61,7 +65,7 @@ const sequelize = new Sequelize(
     port: process.env.SQL_PORT,
     dialect: process.env.DIALECT,
     dialectOptions: {
-      options: { encrypt: false ,  requestTimeout: 30000},
+      options: { encrypt: false ,  requestTimeout: 120000},
     },
   }
 );
@@ -118,6 +122,11 @@ db.tabledate = tabledateModel(sequelize);
 
 db.ucccounts = ucccountsModel(sequelize);
 db.esldump = esldumpModel(sequelize);
+
+db.saudabook = saudabookModel(sequelize);
+db.saudabookcom = saudabookcomModel(sequelize);
+db.saudabookdev = saudabookdevModel(sequelize);
+db.apsubbrokermain = apsubbrokermainModel(sequelize);
 db.sequelize = sequelize;
 // sync all models with database
 /*This checks what is the current state of the table in the database (which columns it has, 

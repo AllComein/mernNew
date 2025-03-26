@@ -213,11 +213,26 @@
     
       return `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
     }
+
+
+
+    function formatDateStrings(dateStr) {
+      if (!dateStr || dateStr.length !== 10 || dateStr.indexOf('-') === -1) return '';
+  
+      // Split the input string by the '-' character
+      const [year, month, day] = dateStr.split('-');
+      
+      // Ensure each part of the date is valid
+      if (!year || !month || !day) return '';
+  
+      // Format as dd-mm-yyyy
+      return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`;
+  }
     
     const viewRecordDetails = () => {
       if (selectedRecords.length < 3) return null;
     
-      const [record1, record2] = selectedRecords;
+      const [record1, record2,record3] = selectedRecords;
     
       if (!record1) return null;
     
@@ -225,6 +240,8 @@
       const filteredDetails = details.filter(
         record => record.code === record1.kslucc && record.date === filter2
       );
+
+
       
       const paginatedDetails = paginateRecords(filteredDetails);
     
@@ -309,7 +326,7 @@
                   <div style={clientInfoStyle}>
                     <p style={{ ...paragraphStyle, fontSize: '11px' }}><strong>Client Name:</strong> {record1.clname}</p>
                     <p style={{ ...paragraphStyle, fontSize: '11px' }}>
-      <strong>Trade Date:</strong> {formatDateString(record1.ks_lstrdt)}
+      <strong>Trade Date:</strong> {formatDateStrings(filter2)}
     </p>
                     <p style={{ ...paragraphStyle, fontSize: '11px' }}><strong>Client Code:</strong> {record1.kslucc}</p>
                   </div>
@@ -488,7 +505,7 @@
                   ))}
                 </datalist>
               </div>
-    
+{/*     
               <div className="form-group">
       <label htmlFor="tradeDate">Trade Date:</label>
       <select
@@ -505,7 +522,29 @@
           </option>
         ))}
       </select>
-    </div>
+    </div> */}
+    
+
+
+    <div className="form-group">
+  <label htmlFor="tradeDate">Trade Date:</label>
+  <input
+    className="form-control"
+    list="tradeDateOptions"
+    id="tradeDate"
+    value={filter2}
+    onChange={(e) => setFilter2(e.target.value)}
+    placeholder="Select or type a trade date"
+    required
+  />
+  <datalist id="tradeDateOptions">
+    {[...new Set(details.map((detail) => detail.date))].map((uniqueDate) => (
+      <option key={uniqueDate} value={uniqueDate}>
+        {uniqueDate}
+      </option>
+    ))}
+  </datalist>
+</div>
     
     
     

@@ -237,7 +237,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to application." });
 });
 
 // routes
@@ -303,6 +303,11 @@ app.use("/tabledate", require("./controllers/tabledate.controller"));
 app.use("/ucccounts", require("./controllers/ucccounts.controller"));
 app.use("/esldump", require("./controllers/esldump.controller"));
 // app.use("/bhav", require("./controllers/bhav.controller"));
+app.use("/saudabook", require("./controllers/saudabook.controller"));
+app.use("/saudabookcom", require("./controllers/saudabookcom.controller"));
+app.use("/saudabookdev", require("./controllers/saudabookdev.controller"));
+app.use("/apsubbrokermain", require("./controllers/apsubbrokermain.controller"));
+app.use("/dealslips", require("./controllers/dealslips.controller"));
 // set port, listen for requests
 
 function initial() {

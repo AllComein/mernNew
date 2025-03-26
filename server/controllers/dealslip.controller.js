@@ -4,7 +4,10 @@ const dealslipService = require("../services/dealslip.service");
 
 router.get("/", async (req, res) => {
   try {
-    var people = await dealslipService.getAll();
+    // var people = await dealslipService.getAll();
+    const limit = req.query.limit || 50;
+    const offset = req.query.offset || 0;
+    var people = await dealslipService.getAll(limit, offset);
     res.json(people);
   } catch (error) {
     console.log(error);
