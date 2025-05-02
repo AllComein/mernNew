@@ -308,6 +308,8 @@ app.use("/saudabookcom", require("./controllers/saudabookcom.controller"));
 app.use("/saudabookdev", require("./controllers/saudabookdev.controller"));
 app.use("/apsubbrokermain", require("./controllers/apsubbrokermain.controller"));
 app.use("/dealslips", require("./controllers/dealslips.controller"));
+
+app.use("/stocklimits", require("./controllers/stocklimits.controller"));
 // set port, listen for requests
 
 function initial() {
@@ -928,6 +930,42 @@ app.post('/run-kslpf', (req, res) => {
     }
   }
 });
+
+
+
+
+
+
+
+const executeBatchStock = (res) => {
+  exec('start cmd.exe /k "C:\\Users\\anujj\\Desktop\\bat\\stocklimits\\stocklimits.bat"', (error) => {
+    if (error) {
+      console.error('Error opening batch file:', error);
+      return res.status(500).json({ status: "fail", message: 'Failed to open batch file' });
+    }
+
+    res.status(200).json({ status: "success", message: 'Batch file executed successfully' });
+  });
+};
+
+app.post('/run-stocklimit', (req, res) => {
+  try {
+    // Directly execute the batch file without any database logic
+    executeBatchStock(res);
+  } catch (error) {
+    console.error('Error executing batch file:', error);
+    if (!res.headersSent) {
+      res.status(500).json({ status: "fail", message: 'Error running batch file' });
+    }
+  }
+});
+
+
+
+
+
+
+
 
 
 

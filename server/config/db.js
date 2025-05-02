@@ -54,6 +54,11 @@ const saudabookModel = require("../models/saudabook.model");
 const saudabookcomModel = require("../models/saudabookcom.model");
 const saudabookdevModel = require("../models/saudabookdev.model");
 const apsubbrokermainModel = require("../models/apsubbrokermain.model");
+
+const stocklimitsModel = require("../models/stocklimits.model");
+
+//const controlstatementModel = require("../models/controlstatement.model");
+
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -127,6 +132,11 @@ db.saudabook = saudabookModel(sequelize);
 db.saudabookcom = saudabookcomModel(sequelize);
 db.saudabookdev = saudabookdevModel(sequelize);
 db.apsubbrokermain = apsubbrokermainModel(sequelize);
+
+db.stocklimits = stocklimitsModel(sequelize)
+
+// db.controlstatement = controlstatementModel(sequelize)
+
 db.sequelize = sequelize;
 // sync all models with database
 /*This checks what is the current state of the table in the database (which columns it has, 

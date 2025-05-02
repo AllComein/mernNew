@@ -897,6 +897,8 @@ import LedgerDetailUser from "./components/ledgerdetail/ledgerdetailuser.compone
 import Brokrage from "./components/brokrage/brokrage.component";
 import Brokrages from "./components/brokrage/brokrages.component";
 import Dealslips from "./components/letter/dealslips.component";
+import BalanceInfo from "./components/balanceinfo/balanceinfo.component";
+import BalanceInfos from "./components/balanceinfo/balanceinfos.component";
 
 
 
@@ -1185,6 +1187,14 @@ class App extends Component {
                 <FaRegFolderClosed/> Trades
                 </Link>
               </li>
+
+              <li className={`sidebar-item ${activeItem === 'item4001' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item4001')}>
+                <Link to={"/balanceinfo"} className="nav-link">
+                <FaRegFolderClosed/> BalanceInfo
+                </Link>
+              </li>
+
               <li className={`sidebar-item ${activeItem === 'item400' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item400')}>
                 <Link to={"/port1"} className="nav-link">
@@ -1383,6 +1393,14 @@ class App extends Component {
                 <FaRegFolderClosed/> Trades
                 </Link>
               </li>
+
+              <li className={`sidebar-item ${activeItem === 'item4001' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item4001')}>
+                <Link to={"/balanceinfos"} className="nav-link">
+                <FaRegFolderClosed/> BalanceInfo
+                </Link>
+              </li>
+
             <li className={`sidebar-item ${activeItem === 'item400' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item400')}>
                 <Link to={"/port2"} className="nav-link">
@@ -1686,6 +1704,13 @@ class App extends Component {
                 <FaRegFolderClosed/> Trades
                 </Link>
               </li>
+              <li className={`sidebar-item ${activeItem === 'item4001' ? 'active' : ''}`}
+            onClick={() => this.handleItemClick('item4001')}>
+                <Link to={"/balanceinfo"} className="nav-link">
+                <FaRegFolderClosed/> BalanceInfo
+                </Link>
+              </li>
+              
               <li className={`sidebar-item ${activeItem === 'item400' ? 'active' : ''}`}
             onClick={() => this.handleItemClick('item400')}>
                 <Link to={"/port1"} className="nav-link">
@@ -2480,6 +2505,16 @@ AuthService.getCurrentUser() ? (
             <Route path="/dealslips" element={
 AuthService.getCurrentUser() ? (
   <Dealslips/>      ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/balanceinfo" element={
+AuthService.getCurrentUser() ? (
+  <BalanceInfo/>     ) : (
+              <Navigate to="/login" />
+            )}/>
+            <Route path="/balanceinfos" element={
+AuthService.getCurrentUser() ? (
+  <BalanceInfos/>     ) : (
               <Navigate to="/login" />
             )}/>
             </Routes>

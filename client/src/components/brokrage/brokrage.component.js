@@ -1116,7 +1116,7 @@ function downloadAll() {
     const dlbrokLabel = calcType === "Slab" ? `Delivery Brokerage (${percentage[segment].dlbrok_slab}% Slab)` : `Delivery Brokerage (${percentage[segment].dlbrok_perc}%)`;
 
     const data = [
-      ["Sno.", "Client Code", "Client Name", "Client Location", "LocnID", "Squp Brokerage", "Delivery Brokerage", "Squp Volume", "Delivery Volume", squpLabel, dlbrokLabel, "Diff Squp", "Diff Delivery"],
+      ["Sno.", "Client Code", "Client Name", "Client Location", "LocnID", "Squp Brokerage", "Total Brokerage", "Squp Volume", "Delivery Volume", "Total Volume", squpLabel, dlbrokLabel, "Total Brokerage Modify", "Difference Squp", "Difference Delivery", "Difference Total Brokerage"],
       ...records.map((record, index) => [
         index + 1,
         record.client_code || "",
@@ -1125,12 +1125,24 @@ function downloadAll() {
         record.locnid || "",
         parseFloat((record.squp ?? 0).toFixed(2)),
         parseFloat((record.dlbrok ?? 0).toFixed(2)),
+
+        parseFloat(((record.squp + record.dlbrok) ?? 0).toFixed(2)),
+
         parseFloat((record.volsqup ?? 0).toFixed(2)),
         parseFloat((record.voldlbrok ?? 0).toFixed(2)),
+
+        parseFloat(((record.volsqup + record.voldlbrok) ?? 0).toFixed(2)),
+        
         parseFloat((record.broksqup ?? 0).toFixed(2)),
         parseFloat((record.brokdlv ?? 0).toFixed(2)),
+
+        parseFloat(((record.broksqup + record.brokdlv) ?? 0).toFixed(2)),
+
         parseFloat((record.diff_squp ?? 0).toFixed(2)),
         parseFloat((record.diff_dlbrok ?? 0).toFixed(2)),
+
+        parseFloat(((record.squp + record.dlbrok) ?? 0) - ((record.broksqup + record.brokdlv) ?? 0).toFixed(2)),
+
       ]),
     ];
 
@@ -1140,14 +1152,25 @@ function downloadAll() {
     // Compute Totals
     const totalRow = [
       "Total", "", "", "", "",
-      records.reduce((sum, record) => sum + (record.squp ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.dlbrok ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.volsqup ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.voldlbrok ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.broksqup ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.brokdlv ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.diff_squp ?? 0), 0).toFixed(2),
-      records.reduce((sum, record) => sum + (record.diff_dlbrok ?? 0), 0).toFixed(2),
+      parseFloat(records.reduce((sum, record) => sum + (record.squp ?? 0), 0).toFixed(2)),
+      parseFloat(records.reduce((sum, record) => sum + (record.dlbrok ?? 0), 0).toFixed(2)),
+
+      parseFloat(records.reduce((sum, record) => sum + ((record.squp + record.dlbrok) ?? 0,0)).toFixed(2)),
+      
+      parseFloat(records.reduce((sum, record) => sum + (record.volsqup ?? 0), 0).toFixed(2)),
+      parseFloat(records.reduce((sum, record) => sum + (record.voldlbrok ?? 0), 0).toFixed(2)),
+
+      parseFloat((records.reduce((sum, record) => sum + (record.volsqup + record.voldlbrok) ?? 0,0)).toFixed(2)),
+
+      parseFloat(records.reduce((sum, record) => sum + (record.broksqup ?? 0), 0).toFixed(2)),
+      parseFloat(records.reduce((sum, record) => sum + (record.brokdlv ?? 0), 0).toFixed(2)),
+
+      parseFloat((records.reduce((sum, record) => sum + (record.broksqup + record.brokdlv) ?? 0,0)).toFixed(2)),
+
+      parseFloat(records.reduce((sum, record) => sum + (record.diff_squp ?? 0), 0).toFixed(2)),
+      parseFloat(records.reduce((sum, record) => sum + (record.diff_dlbrok ?? 0), 0).toFixed(2)),
+
+      parseFloat(records.reduce((sum, record) => sum + ((record.squp + record.dlbrok) - (record.broksqup + record.brokdlv) ?? 0,0)).toFixed(2)),
     ];
 
     // Append total row after the blank row
@@ -1226,7 +1249,7 @@ function downloadAll() {
     <div>
       {!previewMode ? (
         <>
-          <h3>Brokerage from 01/04/2024 To 28/02/2025</h3>
+          <h3>Brokerage from 01/04/2024 To 28/03/2025</h3>
           {loading ? (
             <Spinner animation="border" />
           ) : (
@@ -1449,12 +1472,16 @@ function downloadAll() {
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Calculation Type</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Squp Brokrage</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Dilevery Brokrage</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Total Brokrage</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Squp Volume</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Dilevery Volume</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Total Volume</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Squp Brokrage ({rowCalculationType[segment] === "Slab" ? percentage[segment].squp_slab + "% Slab" : percentage[segment].squp_perc + "%"})</th>
         <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Dilevery Brokrage ({rowCalculationType[segment] === "Slab" ? percentage[segment].dlbrok_slab + "% Slab" : percentage[segment].dlbrok_perc + "%"})</th>
-        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Diff Squp</th>
-        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Diff Dilevery</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Total Brokrage Modify</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Difference Squp</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Difference Dilevery</th>
+        <th style={{ position: "sticky", top: 0, backgroundColor: "#f8f9fa", zIndex: 1, padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Difference Total Brokrage</th>
       </tr>
     </thead>
     <tbody>
@@ -1467,12 +1494,24 @@ function downloadAll() {
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{rowCalculationType[segment]}</td>
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.squp.toFixed(2)}</td>
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.dlbrok.toFixed(2)}</td>
+
+          <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{(record.squp + record.dlbrok).toFixed(2)}</td>
+
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.volsqup.toFixed(2)}</td>
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.voldlbrok.toFixed(2)}</td>
+
+          <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{(record.volsqup + record.voldlbrok).toFixed(2)}</td>
+
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.broksqup.toFixed(2)}</td>
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.brokdlv.toFixed(2)}</td>
+
+          <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{(record.broksqup + record.brokdlv).toFixed(2)}</td>
+
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.diff_squp.toFixed(2)}</td>
           <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{record.diff_dlbrok.toFixed(2)}</td>
+
+          <td style={{ padding: "8px", textAlign: "left", borderBottom: "1px solid #ddd" }}>{((record.squp + record.dlbrok).toFixed(2) - (record.broksqup + record.brokdlv).toFixed(2)).toFixed(2)}</td>
+
         </tr>
       )) : (
         <tr>

@@ -178,11 +178,44 @@ const UpdatedData = () => {
         }
     };
 
+
+
+    const openBatchStock = async () => {
+        alert('Batch file is being executed. Please wait 5 minutes before clicking again.');
+        setIsButtonDisabled(true);
+        setTimeout(() => setIsButtonDisabled(false), 300000); // Disable button for 5 minutes
+
+        try {
+            const response = await fetch('http://183.182.84.228:4005/run-stocklimit', {
+                method: 'POST',
+            });
+            if (response.ok) {
+                const result = await response.json();
+                // console.log(result.message);
+                setClickCount(prevCount => prevCount + 1);
+                setCurrentDate(new Date().toLocaleDateString());
+            } else {
+                console.error('Failed to open batch file');
+            }
+        } catch (error) {
+            console.error('Error opening batch file:', error);
+        }
+    };
+
+
+
+
+
+
     return (
         <div>
             <h1>My React App</h1>
             <button ref={buttonRef} onClick={openBatchFile} disabled={isButtonDisabled}>
             {isButtonDisabled ? 'Please wait...' : 'Update Data'}
+            </button>
+            <br/>
+            <button ref={buttonRef} onClick={openBatchStock} disabled={isButtonDisabled}>
+            {isButtonDisabled ? 'Please wait...' : 'Update Stock Limits'}
             </button>
             <div>
                 <p>Today's Date: {currentDate}</p>
