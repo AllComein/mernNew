@@ -1742,7 +1742,7 @@ export default function RecordList() {
       
       // Find the letter with the same ucc as the record
       const letter = letters.find((letter) => letter.es_ucc === record.ucc);
-      const matchingesign = esigns.filter((esign) => esign.es_ucc === record.ucc);
+      const matchingesign = esigns.filter((esign) => esign.ucc === record.ucc);
       const matchingportf = portfs.filter((portf) => portf.es_ucc === record.ucc);
       const matchingnetpo = netpos.filter((netpo) => netpo.es_ucc === record.ucc);
       const matchingmtfpo = mtfpos.filter((mtfpo) => mtfpo.es_ucc === record.ucc);
